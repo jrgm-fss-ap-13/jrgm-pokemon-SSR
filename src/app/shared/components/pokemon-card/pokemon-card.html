@@ -1,0 +1,21 @@
+<div
+  [routerLink]="['/pokemons', pokemon().id]"
+ class="animate-fadeIn group relative bg-surface-container-low rounded-xl p-3 sm:p-4 transition-all duration-500 hover:bg-surface-container-high cursor-pointer">
+  <div class="flex justify-between items-start mb-6">
+    <span class="font-headline text-2xl font-black text-on-surface/10">{{ pokemon().id }}</span>
+    <div class="absolute top-3 right-3 sm:top-4 sm:right-4 flex flex-col items-end gap-1 z-20">
+      @for (type of pokemon().type; track type) {
+        <span class="px-2 py-0.5 font-label text-[8px] sm:text-[9px] tracking-widest uppercase rounded-full w-fit {{ typeColors[type] || 'bg-outline text-surface-container-lowest' }}">
+          {{ type }}
+        </span>
+      }
+    </div>
+  </div>
+  <div class="relative h-28 w-full z-10">
+    <img [alt]="pokemon().name" class="specimen-image absolute -top-8 left-1/2 -translate-x-1/2 w-28 h-28 object-contain transition-transform duration-500 drop-shadow-2xl" [attr.data-alt]="pokemon().name" [src]="pokemon().front_default"/>
+  </div>
+  <div>
+    <h3 class="font-headline text-lg font-extrabold tracking-tight uppercase group-hover:text-primary transition-colors">{{ pokemon().name }}</h3>
+    <!-- <p class="text-on-surface-variant text-[10px] sm:text-xs mt-1 leading-tight line-clamp-2">{{ pokemon().description }}</p> -->
+  </div>
+</div>

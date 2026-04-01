@@ -1,0 +1,25 @@
+<!-- Side Navigation Shell -->
+<aside class="hidden md:flex flex-col h-screen sticky top-0 w-56 p-3 gap-1 bg-[#363636] border-r-0 shrink-0">
+  <div class="mb-6 px-3">
+    <h1 [routerLink]="'/pokemons'" class="font-headline font-black cursor-pointer text-[#ba0023] text-xl tracking-tighter">JRGM-POKEDEX</h1>
+    <p class="font-label text-[9px] tracking-widest text-on-surface-variant uppercase mt-1">V1.0.4 FIELD SPECIMEN</p>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a class="flex items-center gap-3 px-3 py-2 bg-surface-container-lowest text-[#ba0023] rounded-lg shadow-sm font-bold transition-all">
+      <span class="material-symbols-outlined text-[20px]" data-icon="catching_pokemon">capture</span>
+      <span class="font-label text-xs tracking-wide uppercase">Pokedex</span>
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2 text-zinc-500 hover:translate-x-1 transition-transform font-medium" href="#">
+      <span class="material-symbols-outlined text-[20px]" data-icon="Electric_bolt">electric_bolt</span>
+      <span class="font-label text-xs tracking-wide uppercase">Moves</span>
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2 text-zinc-500 hover:translate-x-1 transition-transform font-medium" href="#">
+      <span class="material-symbols-outlined text-[20px]" data-icon="backpack">backpack</span>
+      <span class="font-label text-xs tracking-wide uppercase">Items</span>
+    </a>
+    <a class="flex items-center gap-3 px-3 py-2 text-zinc-500 hover:translate-x-1 transition-transform font-medium" href="#">
+      <span class="material-symbols-outlined text-[20px]" data-icon="explore">explore</span>
+      <span class="font-label text-xs tracking-wide uppercase">Locations</span>
+    </a>
+  </nav>
+</aside>

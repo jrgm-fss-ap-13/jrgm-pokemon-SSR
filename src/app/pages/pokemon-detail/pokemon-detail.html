@@ -1,0 +1,149 @@
+@let pokemon = Pokemon();
+
+@if (pokemon) {
+
+@let types = pokemon.types;
+@let stats = pokemon.stats;
+@let totalScore = stats[0].base_stat + stats[1].base_stat + stats[2].base_stat + stats[3].base_stat + stats[4].base_stat
++ stats[5].base_stat;
+
+<main class="flex-1 px-4 md:px-12 overflow-x-hidden">
+    <!-- Hero Specimen Section -->
+    <section class="relative mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center lg:mt-24">
+            <!-- Text Metadata -->
+            <div class="lg:col-span-5 z-10 text-center lg:text-left">
+                <span class="font-headline text-2xl font-bold text-outline-variant tracking-tighter">#{{ (pokemon.id +
+                    '').padStart(4, '0') }}</span>
+                <h1
+                    class="font-headline text-4xl md:text-8xl font-black text-on-surface -mt-2 tracking-tighter leading-none uppercase">
+                    {{ pokemon.name }}</h1>
+                <div class="flex flex-wrap lg:justify-start justify-center gap-3 mt-6">
+                    @for (type of types; track type.type.name) {
+                    <span
+                        class="px-6 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-black/10"
+                        [ngClass]="typeColors[type.type.name]">{{ type.type.name }}</span>
+                    }
+                </div>
+                <p class="mt-8 text-on-surface-variant leading-relaxed max-w-md mx-auto lg:mx-0 capitalize">
+                    {{ pokemon.name }} is a {{ types[0]?.type?.name }} type Pokémon. It has a base stat total of {{
+                    totalScore }}.
+                </p>
+            </div>
+            <!-- Massive Visual Specimen -->
+            <div class="lg:col-span-7 relative flex justify-center items-center mt-8 lg:mt-0">
+                <div
+                    class="absolute w-full h-[150%] lg:-top-20 lg:-right-20 lg:w-[120%] lg:h-[120%] bg-primary/5 rounded-full blur-[80px] lg:blur-[120px]">
+                </div>
+                <img [alt]="pokemon.name + ' Artwork'"
+                    class="relative z-10 w-64 md:w-60 lg:w-[300px] xl:w-[300px] max-w-full drop-shadow-2xl hover:scale-105 transition-transform duration-700 pointer-events-none"
+                    [src]="pokemon.sprites.other?.['official-artwork']?.front_default ?? pokemon.sprites.front_default" />
+            </div>
+        </div>
+    </section>
+    <!-- Bento Grid Stats & Details -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <!-- Stats Panel -->
+        <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8 shadow-sm">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="font-headline text-xl font-bold tracking-tight">BASE STATISTICS</h3>
+                <span class="text-xs font-label uppercase tracking-widest text-outline">Total Score: {{ totalScore
+                    }}</span>
+            </div>
+            <div class="space-y-6">
+                <!-- Stat Row -->
+                @for (stat of stats; track stat.stat.name) {
+                <div class="space-y-2">
+                    <div class="flex justify-between text-xs font-label uppercase font-bold text-on-surface-variant">
+                        <span>{{ stat.stat.name }}</span>
+                        <span>{{ stat.base_stat }}</span>
+                    </div>
+                    <div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-primary to-primary-container rounded-full"
+                            [style.width.%]="(stat.base_stat / 255) * 100"></div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+        <!-- Secondary Info Stack -->
+        <div class="space-y-6">
+            <!-- Physical Specs Card -->
+            <div class="bg-surface-container-high rounded-xl p-8">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">Height
+                        </p>
+                        <p class="font-headline text-2xl font-bold tracking-tight">{{ pokemon.height / 10 }} m</p>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-label font-bold text-outline uppercase tracking-widest mb-1">Weight
+                        </p>
+                        <p class="font-headline text-2xl font-bold tracking-tight">{{ pokemon.weight / 10 }} kg</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Abilities Card -->
+            <div
+                class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10 shadow-[0px_12px_32px_rgba(45,47,47,0.06)]">
+                <h3 class="text-xs font-label font-bold text-outline uppercase tracking-widest mb-4">Core Abilities</h3>
+                <div class="space-y-4">
+                    @for (ability of pokemon.abilities; track ability.ability?.name) {
+                    <div class="group">
+                        <h4 class="font-bold text-sm text-primary flex items-center gap-2 capitalize">
+                            {{ ability.ability?.name }}
+                            @if (ability.is_hidden) {
+                            <span class="material-symbols-outlined text-sm" title="Hidden Ability">visibility_off</span>
+                            } @else {
+                            <span class="material-symbols-outlined text-sm">star</span>
+                            }
+                        </h4>
+                        <p class="text-xs text-on-surface-variant mt-1">
+                            {{ ability.is_hidden ? 'This is a hidden ability.' : 'This is a standard ability.' }}
+                        </p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="mb-16">
+        @let currentPokemonId = pokemon.id + '';
+        <h3 class="font-headline text-3xl font-black tracking-tighter mb-6">EVOLUTION CHAIN</h3>
+
+        @if (evolutionPaths().length) {
+        <div class="space-y-8">
+            @for (branch of evolutionPaths(); track $index) {
+            <div class="overflow-x-auto">
+                <div class="flex items-center gap-4 min-w-max px-2 py-3">
+                    @for (evolution of branch; track evolution.id; let isLast = $last) {
+                    <a [routerLink]="['/pokemon', evolution.id]" class="text-center group shrink-0">
+                        <div class="relative w-32 h-32 md:w-36 md:h-36 flex items-center justify-center rounded-xl mb-3 bg-white">
+                            <img [alt]="evolution.name"
+                                class="w-36 h-36 md:w-36 md:h-36"
+                                [src]="evolution.image" />
+                        </div>
+                        <p class="font-headline font-bold capitalize"
+                            [ngClass]="evolution.id === currentPokemonId ? 'text-primary' : 'text-on-surface'">
+                            {{ evolution.name }}
+                        </p>
+                        <p class="text-[10px] font-label font-bold text-outline-variant uppercase">#{{ evolution.id.padStart(4, '0') }}</p>
+                    </a>
+
+                    @if (!isLast) {
+                    <span class="material-symbols-outlined text-outline-variant">arrow_forward_ios</span>
+                    }
+                    }
+                </div>
+            </div>
+            }
+        </div>
+        } @else {
+        <p class="text-on-surface-variant">No evolution data available.</p>
+        }
+    </section>
+</main>
+} @else {
+<app-pokemon-detail-skeleton></app-pokemon-detail-skeleton>
+}

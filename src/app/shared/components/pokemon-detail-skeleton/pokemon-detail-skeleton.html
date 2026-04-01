@@ -1,0 +1,78 @@
+<main class="flex-1 px-4 md:px-12 py-8 overflow-x-hidden animate-pulse">
+    <!-- Hero Specimen Section -->
+    <section class="relative mb-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mt-24">
+            <!-- Text Metadata -->
+            <div class="lg:col-span-5 z-10 space-y-4">
+                <div class="h-8 w-16 bg-surface-container-high rounded"></div>
+                <div class="h-20 w-3/4 bg-surface-container-high rounded -mt-2"></div>
+                <div class="flex gap-3 mt-6">
+                    <div class="h-8 w-24 rounded-full bg-surface-container-high"></div>
+                    <div class="h-8 w-24 rounded-full bg-surface-container-high"></div>
+                </div>
+                <div class="mt-8 space-y-2">
+                    <div class="h-4 w-full bg-surface-container-high rounded"></div>
+                    <div class="h-4 w-5/6 bg-surface-container-high rounded"></div>
+                    <div class="h-4 w-4/6 bg-surface-container-high rounded"></div>
+                </div>
+            </div>
+            <!-- Massive Visual Specimen -->
+            <div class="lg:col-span-7 relative flex justify-center items-center">
+                <div class="w-64 h-64 bg-surface-container-high rounded-full opacity-50"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Bento Grid Stats & Details -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <!-- Stats Panel -->
+        <div class="md:col-span-2 bg-surface-container-low rounded-xl p-8 shadow-sm">
+            <div class="flex justify-between items-center mb-8">
+                <div class="h-6 w-40 bg-surface-container-high rounded"></div>
+                <div class="h-4 w-24 bg-surface-container-high rounded"></div>
+            </div>
+            <div class="space-y-6">
+                <!-- Stat Row -->
+                @for (i of [1,2,3,4,5,6]; track $index) {
+                <div class="space-y-2">
+                    <div class="flex justify-between">
+                        <div class="h-4 w-16 bg-surface-container-high rounded"></div>
+                        <div class="h-4 w-8 bg-surface-container-high rounded"></div>
+                    </div>
+                    <div class="h-2 w-full bg-surface-container-high rounded-full"></div>
+                </div>
+                }
+            </div>
+        </div>
+        <!-- Secondary Info Stack -->
+        <div class="space-y-6">
+            <!-- Physical Specs Card -->
+            <div class="bg-surface-container-high rounded-xl p-8">
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <div class="h-3 w-12 bg-surface-container-highest rounded mb-2"></div>
+                        <div class="h-8 w-20 bg-surface-container-highest rounded"></div>
+                    </div>
+                    <div>
+                        <div class="h-3 w-12 bg-surface-container-highest rounded mb-2"></div>
+                        <div class="h-8 w-20 bg-surface-container-highest rounded"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Abilities Card -->
+            <div class="bg-surface-container-lowest rounded-xl p-8 border border-outline-variant/10">
+                <div class="h-4 w-32 bg-surface-container-high rounded mb-4"></div>
+                <div class="space-y-4">
+                    <div class="group">
+                        <div class="h-5 w-24 bg-surface-container-high rounded mb-2"></div>
+                        <div class="h-3 w-full bg-surface-container-high rounded"></div>
+                    </div>
+                    <div class="group">
+                        <div class="h-5 w-32 bg-surface-container-high rounded mb-2"></div>
+                        <div class="h-3 w-5/6 bg-surface-container-high rounded"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
