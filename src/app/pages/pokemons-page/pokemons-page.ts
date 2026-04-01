@@ -67,10 +67,15 @@ export default class PokemonsPage implements OnInit {
 
     this.pokemonsService.loadPage(pageToLoad)
     .pipe(
-      tap( () => 
+      tap(() => {
+      const current = this.currentPage();
+
+      if (current !== pageToLoad) {
         this.router.navigate([], {
           queryParams: { page: pageToLoad }
-        }))
+        });
+      }
+    })
     )
     .subscribe( pokemons => {
         this.pokemons.set(pokemons);

@@ -17,8 +17,6 @@ import { tap } from 'rxjs';
 })
 export default class PokemonDetail implements OnInit {
 
-
-
   private pokemonService = inject(PokemonsService);
   private route = inject(ActivatedRoute);
   private title = inject(Title);
