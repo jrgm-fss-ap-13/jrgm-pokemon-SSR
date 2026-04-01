@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { Evolution, Pokemon } from '../../interfaces';
 import { PokemonsService } from '../../services/pokemons.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
